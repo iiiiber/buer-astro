@@ -4,6 +4,14 @@ interface Props {
   description?: string;
 }
 const { title, description = '不二的数字基地，记录成长与折腾' } = Astro.props;
+const pathname = Astro.url.pathname;
+const navItems = [
+  { href: '/documents', label: '文档' },
+  { href: '/diary', label: '日记' },
+  { href: '/about', label: '关于' },
+  { href: '/skills', label: '技能' },
+];
+const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 ---
 <!DOCTYPE html>
 <html lang="zh-CN" class="dark">
@@ -108,11 +116,16 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
         不二
       </a>
       <div class="flex items-center gap-4 text-sm flex-1 justify-end">
-        <div class="flex gap-5">
-          <a href="/documents" class="hover:text-zinc-400 transition">文档</a>
-          <a href="/diary" class="hover:text-zinc-400 transition">日记</a>
-          <a href="/about" class="hover:text-zinc-400 transition">关于</a>
-          <a href="/skills" class="hover:text-zinc-400 transition">技能</a>
+        <div class="flex items-center gap-1 text-sm flex-1 justify-end overflow-x-auto">
+          <a href="/" class="shrink-0 hover:text-zinc-400 transition text-zinc-500 dark:text-zinc-400">首页</a>
+          {navItems.map(item => (
+            <>
+              <span class="text-zinc-600 dark:text-zinc-600 shrink-0">/</span>
+              <a href={item.href}
+                class={`shrink-0 transition ${isActive(item.href) ? 'text-zinc-800 dark:text-zinc-200 font-medium' : 'hover:text-zinc-400 text-zinc-500 dark:text-zinc-400'}`}
+              >{item.label}</a>
+            </>
+          ))}
         </div>
         <div class="search-wrap" id="search-container">
           <button id="search-trigger" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition" title="搜索" aria-label="搜索">
