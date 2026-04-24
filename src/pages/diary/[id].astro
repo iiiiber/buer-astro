@@ -14,12 +14,12 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 ---
 <Base title={`${entry.title} · 不二`} description={entry.excerpt}>
-  <a href="/diary" class="inline-flex items-center gap-1 text-pink-500 dark:text-pink-400 hover:text-pink-600 dark:hover:text-pink-300 text-sm mb-6">
+  <a href="/diary" class="inline-flex items-center gap-1 text-amber-500 dark:text-amber-400 hover:text-amber-600 dark:hover:text-pink-300 text-sm mb-6">
     ← 返回日记
   </a>
   <article class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-8">
     <div class="mb-6 pb-6 border-b border-gray-200 dark:border-gray-800">
-      <span class="text-xs text-pink-500 dark:text-pink-400 mb-1 block">{entry.date} · {entry.category}</span>
+      <span class="text-xs text-amber-500 dark:text-amber-400 mb-1 block">{entry.date} · {entry.category}</span>
       <h1 class="text-3xl font-bold mb-3">{entry.title}</h1>
       <div class="flex gap-2 flex-wrap">
         {entry.tags.map(tag => (
