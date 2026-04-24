@@ -161,15 +161,6 @@
       "excerpt": "基于20天对话记录分析鹏飞的行为模式与优势，提出两个人生赛道选项（副业内容矩阵 vs AI开发服务），并制定30天聚焦行动计划。",
       "source": "feishu",
       "feishuUrl": "https://my.feishu.cn/docx/L6ZSdCaIyo09h0xLRlycgIdHnhh"
-    },
-    {
-      "id": "sticker-dev-doc-v1",
-      "title": "表情包生成工具 - 开发文档 v1.0",
-      "date": "2026-04-24",
-      "category": "开发文档",
-      "excerpt": "表情包生成工具完整开发文档，包含产品定位、技术架构、前后端API设计、数据库设计、AI方案、开发里程碑。",
-      "source": "local",
-      "externalUrl": "/sticker-dev-doc.html"
     }
   ]
 }
