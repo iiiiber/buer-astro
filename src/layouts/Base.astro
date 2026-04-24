@@ -106,7 +106,38 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
     .search-item-meta { color: var(--text-muted); font-size: 0.75rem; margin-top: 2px; }
     .search-item-excerpt { color: var(--text-secondary); font-size: 0.8rem; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .search-empty { padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
-    .search-section-label { padding: 0.5rem 1rem 0.25rem; font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-top: 0.5rem; }
+    .mobile-menu-links { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+    .mobile-menu-links a {
+      font-size: 1.25rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      color: var(--text-secondary);
+      transition: background 0.15s, color 0.15s;
+    }
+    .mobile-menu-links a:hover, .mobile-menu-links a.active {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+    .mobile-menu-footer { display: flex; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--border-color); }
+    .hamburger-btn { display: none; }
+    @media (max-width: 640px) {
+      .desktop-nav { display: none; }
+      .hamburger-btn { display: flex; }
+    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -115,18 +146,13 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
       <a href="/" class="text-xl font-bold bg-gradient-to-r from-zinc-400 to-emerald-400 bg-clip-text text-transparent shrink-0">
         不二
       </a>
-      <div class="flex items-center gap-4 text-sm flex-1 justify-end">
-        <div class="flex items-center gap-1 text-sm flex-1 justify-end overflow-x-auto">
-          <a href="/" class="shrink-0 hover:text-zinc-400 transition text-zinc-500 dark:text-zinc-400">首页</a>
-          {navItems.map(item => (
-            <>
-              <span class="text-zinc-600 dark:text-zinc-600 shrink-0">/</span>
-              <a href={item.href}
-                class={`shrink-0 transition ${isActive(item.href) ? 'text-zinc-800 dark:text-zinc-200 font-medium' : 'hover:text-zinc-400 text-zinc-500 dark:text-zinc-400'}`}
-              >{item.label}</a>
-            </>
-          ))}
-        </div>
+      <div class="flex items-center gap-3">
+        <nav class="desktop-nav hidden sm:flex items-center gap-5 text-sm">
+          <a href="/documents" class="hover:text-zinc-400 transition text-zinc-500 dark:text-zinc-400">文档</a>
+          <a href="/diary" class="hover:text-zinc-400 transition text-zinc-500 dark:text-zinc-400">日记</a>
+          <a href="/about" class="hover:text-zinc-400 transition text-zinc-500 dark:text-zinc-400">关于</a>
+          <a href="/skills" class="hover:text-zinc-400 transition text-zinc-500 dark:text-zinc-400">技能</a>
+        </nav>
         <div class="search-wrap" id="search-container">
           <button id="search-trigger" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition" title="搜索" aria-label="搜索">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -143,10 +169,44 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
             <div id="search-dropdown" class="search-dropdown"></div>
           </div>
         </div>
-        <button id="theme-toggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition shrink-0" title="切换主题" aria-label="切换深浅色模式">
+        <button id="theme-toggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition" title="切换主题" aria-label="切换深浅色模式">
           <svg id="sun-icon" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <svg id="moon-icon" class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
+        <button id="hamburger-btn" class="hamburger-btn p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition" aria-label="菜单">
+          <svg id="hamburger-icon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+      <a href="/" class="text-xl font-bold bg-gradient-to-r from-zinc-400 to-emerald-400 bg-clip-text text-transparent">不二</a>
+      <button id="mobile-menu-close" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600" aria-label="关闭">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="mobile-menu-links">
+      <a href="/" class={isActive('/') ? 'active' : ''}>首页</a>
+      {navItems.map(item => (
+        <a href={item.href} class={isActive(item.href) ? 'active' : ''}>{item.label}</a>
+      ))}
+    </div>
+    <div class="mobile-menu-footer">
+      <button id="search-trigger-mobile" class="flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 text-zinc-500 dark:text-zinc-400 text-sm flex-1">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        搜索...
+      </button>
+      <button id="theme-toggle-mobile" class="p-3 rounded-xl border border-gray-300 dark:border-gray-600" aria-label="切换主题">
+        <svg id="sun-icon-mobile" class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="moon-icon-mobile" class="w-5 h-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
       </div>
     </div>
   </nav>
@@ -300,6 +360,34 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
     });
     searchInput.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeSearch();
+    });
+
+    // Mobile menu
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const searchTriggerMobile = document.getElementById('search-trigger-mobile');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    hamburgerBtn.addEventListener('click', openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+    mobileMenu.addEventListener('click', e => {
+      if (e.target === mobileMenu) closeMobileMenu();
+    });
+    searchTriggerMobile.addEventListener('click', () => {
+      closeMobileMenu();
+      openSearch();
+    });
+    themeToggleMobile.addEventListener('click', () => {
+      setTheme(!html.classList.contains('dark'));
     });
   </script>
 </body>
