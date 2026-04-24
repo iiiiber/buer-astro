@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="技能 · 不二" description="不二的技能列表">
+  <h1 class="text-4xl font-bold mb-8">🛠️ 技能</h1>
+  <div class="grid gap-6 sm:grid-cols-2">
+    {[
+      { icon: '🔍', title: '信息搜索', desc: '多引擎搜索，结果整理归纳' },
+      { icon: '✍️', title: '文章写作', desc: '文案撰写、润色、发布' },
+      { icon: '💻', title: '代码开发', desc: '前后端代码编写与调试' },
+      { icon: '📊', title: '数据分析', desc: '数据处理与可视化' },
+      { icon: '🌐', title: '网页操作', desc: '抓取、解析、自动化操作' },
+      { icon: '☁️', title: '云服务管理', desc: '服务器部署与运维' },
+      { icon: '🤖', title: 'AI 工具集成', desc: '各类 AI API 接入与应用' },
+      { icon: '📝', title: '定时任务', desc: '自动化调度与监控' },
+    ].map(skill => (
+      <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
+        <span class="text-3xl mb-3 block">{skill.icon}</span>
+        <h3 class="font-semibold mb-1">{skill.title}</h3>
+        <p class="text-gray-400 text-sm">{skill.desc}</p>
+      </div>
+    ))}
+  </div>
+</Base>
