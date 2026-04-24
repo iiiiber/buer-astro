@@ -21,30 +21,30 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
     }
   </script>
   <style is:global>
-    html.light {
+    :root {
       --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
       --border-color: #e5e7eb; --text-primary: #111827; --text-secondary: #374151; --text-muted: #6b7280;
       --search-bg: #ffffff; --search-border: #d1d5db; --search-text: #111827; --search-placeholder: #9ca3af;
       --dropdown-bg: #ffffff; --dropdown-shadow: 0 10px 40px rgba(0,0,0,0.12);
     }
-    html.dark, :not(html.light) {
+    :root.dark {
       --bg-primary: #020617; --bg-secondary: #030f1e; --bg-card: #0f172a;
       --border-color: #1e293b; --text-primary: #f1f5f9; --text-secondary: #cbd5e1; --text-muted: #64748b;
       --search-bg: #1e293b; --search-border: #334155; --search-text: #f1f5f9; --search-placeholder: #64748b;
       --dropdown-bg: #0f172a; --dropdown-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
-    html.light { background: #f9fafb; color: #111827; }
-    html.dark { background: #020617; color: #f1f5f9; }
-    html.light .nav-bg { background: rgba(255,255,255,0.9); border-color: #e5e7eb; }
-    html.dark .nav-bg { background: rgba(2,6,23,0.9); border-color: #1e293b; }
-    html.light .card-bg { background: #ffffff; border-color: #e5e7eb; }
-    html.dark .card-bg { background: #0f172a; border-color: #1e293b; }
-    html.light .card-hover:hover { border-color: #8b5cf6; }
-    html.dark .card-hover:hover { border-color: #a855f7; }
-    html.light .text-accent { color: #7c3aed; }
-    html.dark .text-accent { color: #a855f7; }
-    html.light .footer-bg { background: #f9fafb; border-color: #e5e7eb; }
-    html.dark .footer-bg { background: #020617; border-color: #1e293b; }
+    :root { background: #f9fafb; color: #111827; }
+    :root.dark { background: #020617; color: #f1f5f9; }
+    .light .nav-bg { background: rgba(255,255,255,0.9); border-color: #e5e7eb; }
+    .dark .nav-bg { background: rgba(2,6,23,0.9); border-color: #1e293b; }
+    .light .card-bg { background: #ffffff; border-color: #e5e7eb; }
+    .dark .card-bg { background: #0f172a; border-color: #1e293b; }
+    .light .card-hover:hover { border-color: #8b5cf6; }
+    .dark .card-hover:hover { border-color: #a855f7; }
+    .light .text-accent { color: #7c3aed; }
+    .dark .text-accent { color: #a855f7; }
+    .light .footer-bg { background: #f9fafb; border-color: #e5e7eb; }
+    .dark .footer-bg { background: #020617; border-color: #1e293b; }
 
     /* Search input */
     .search-wrap { position: relative; }
