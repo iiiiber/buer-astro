@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { doc } = Astro.props;
 
-// Redirect local docs with externalUrl to the standalone HTML file
+// For docs with an externalUrl (standalone HTML pages), redirect there
 if (doc.externalUrl) {
   return Astro.redirect(doc.externalUrl);
 }
@@ -25,7 +25,7 @@ if (doc.externalUrl) {
     <h1 class="text-3xl font-bold mb-4">{doc.title}</h1>
     <p class="text-gray-500 dark:text-gray-400 mb-6">{doc.excerpt}</p>
     {doc.feishuUrl && (
-      <a href={doc.feishuUrl} target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-zinc-500 dark:bg-zinc-600 hover:bg-zinc-600 dark:hover:bg-zinc-500 rounded-lg text-sm transition text-white">
+      <a href={doc.feishuUrl} target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-zinc-500 dark:bg-zinc-600 hover:bg-zinc-600 dark:hover:bg-zinc-500 rounded-lg text-sm transition text-white mb-6">
         📄 查看飞书原文
       </a>
     )}
