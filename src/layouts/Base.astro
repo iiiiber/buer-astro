@@ -53,14 +53,14 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
       border: 1px solid var(--search-border);
       color: var(--search-text);
       border-radius: 0.5rem;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.8rem;
-      width: 180px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      width: 120px;
       outline: none;
       transition: border-color 0.2s, width 0.2s;
     }
     .search-input::placeholder { color: var(--search-placeholder); }
-    .search-input:focus { border-color: #10b981; width: 220px; }
+    .search-input:focus { border-color: #10b981; width: 200px; }
     html.dark .search-input:focus { border-color: #34d399; }
 
     /* Search dropdown */
@@ -113,7 +113,7 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
             type="search"
             id="search-input"
             class="search-input"
-            placeholder="搜索文档和日记..."
+            placeholder="搜索..."
             autocomplete="off"
           />
           <div id="search-dropdown" class="search-dropdown"></div>
