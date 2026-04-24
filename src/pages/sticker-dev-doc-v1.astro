@@ -2,8 +2,11 @@
 import Base from '../layouts/Base.astro';
 import docsData from '../data/documents.json';
 
+// Find the doc - hardcoded lookup, runs at build time in module scope
 const doc = docsData.documents.find(d => d.id === 'sticker-dev-doc-v1');
-if (!doc) return Astro.redirect('/documents');
+if (!doc) {
+  return Astro.redirect('/documents');
+}
 ---
 <Base title={`${doc.title} · 不二`} description={doc.excerpt}>
   <a href="/documents" class="inline-flex items-center gap-1 text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 text-sm mb-6">
@@ -13,7 +16,7 @@ if (!doc) return Astro.redirect('/documents');
     <span class="text-xs text-zinc-500 dark:text-zinc-400 mb-2 block">{doc.category} · {doc.date}</span>
     <h1 class="text-3xl font-bold mb-4">{doc.title}</h1>
     <p class="text-gray-500 dark:text-gray-400 mb-6">{doc.excerpt}</p>
-    <div class="prose-docs mt-6" set:html={doc.content} />
+    {doc.content && <div class="prose-docs mt-6" set:html={doc.content} />}
   </div>
 </Base>
 
