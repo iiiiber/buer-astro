@@ -14,7 +14,6 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <script is:inline>
-    // Apply saved theme before render to avoid flash
     const saved = localStorage.getItem('theme');
     if (saved === 'light') {
       document.documentElement.classList.remove('dark');
@@ -22,12 +21,22 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
     }
   </script>
   <style is:global>
-    html.light { --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff; --border-color: #e5e7eb; --text-primary: #111827; --text-secondary: #374151; --text-muted: #6b7280; }
-    html.dark, :not(html.light) { --bg-primary: #020617; --bg-secondary: #030f1e; --bg-card: #0f172a; --border-color: #1e293b; --text-primary: #f1f5f9; --text-secondary: #cbd5e1; --text-muted: #64748b; }
+    html.light {
+      --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
+      --border-color: #e5e7eb; --text-primary: #111827; --text-secondary: #374151; --text-muted: #6b7280;
+      --search-bg: #ffffff; --search-border: #d1d5db; --search-text: #111827; --search-placeholder: #9ca3af;
+      --dropdown-bg: #ffffff; --dropdown-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    }
+    html.dark, :not(html.light) {
+      --bg-primary: #020617; --bg-secondary: #030f1e; --bg-card: #0f172a;
+      --border-color: #1e293b; --text-primary: #f1f5f9; --text-secondary: #cbd5e1; --text-muted: #64748b;
+      --search-bg: #1e293b; --search-border: #334155; --search-text: #f1f5f9; --search-placeholder: #64748b;
+      --dropdown-bg: #0f172a; --dropdown-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
     html.light { background: #f9fafb; color: #111827; }
     html.dark { background: #020617; color: #f1f5f9; }
-    html.light .nav-bg { background: #ffffff; border-color: #e5e7eb; }
-    html.dark .nav-bg { background: #020617; border-color: #1e293b; }
+    html.light .nav-bg { background: rgba(255,255,255,0.9); border-color: #e5e7eb; }
+    html.dark .nav-bg { background: rgba(2,6,23,0.9); border-color: #1e293b; }
     html.light .card-bg { background: #ffffff; border-color: #e5e7eb; }
     html.dark .card-bg { background: #0f172a; border-color: #1e293b; }
     html.light .card-hover:hover { border-color: #8b5cf6; }
@@ -36,22 +45,80 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
     html.dark .text-accent { color: #a855f7; }
     html.light .footer-bg { background: #f9fafb; border-color: #e5e7eb; }
     html.dark .footer-bg { background: #020617; border-color: #1e293b; }
+
+    /* Search input */
+    .search-wrap { position: relative; }
+    .search-input {
+      background: var(--search-bg);
+      border: 1px solid var(--search-border);
+      color: var(--search-text);
+      border-radius: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      width: 180px;
+      outline: none;
+      transition: border-color 0.2s, width 0.2s;
+    }
+    .search-input::placeholder { color: var(--search-placeholder); }
+    .search-input:focus { border-color: #10b981; width: 220px; }
+    html.dark .search-input:focus { border-color: #34d399; }
+
+    /* Search dropdown */
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 360px;
+      background: var(--dropdown-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      box-shadow: var(--dropdown-shadow);
+      z-index: 100;
+      display: none;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+    .search-dropdown.show { display: block; }
+    .search-item {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .search-item:last-child { border-bottom: none; }
+    .search-item:hover { background: var(--bg-secondary); }
+    .search-item-title { color: var(--text-primary); font-size: 0.875rem; font-weight: 500; }
+    .search-item-meta { color: var(--text-muted); font-size: 0.75rem; margin-top: 2px; }
+    .search-item-excerpt { color: var(--text-secondary); font-size: 0.8rem; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .search-empty { padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+    .search-section-label { padding: 0.5rem 1rem 0.25rem; font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
   </style>
 </head>
 <body class="min-h-screen">
   <nav class="nav-bg border-b sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="text-xl font-bold bg-gradient-to-r from-zinc-400 to-emerald-400 bg-clip-text text-transparent">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <a href="/" class="text-xl font-bold bg-gradient-to-r from-zinc-400 to-emerald-400 bg-clip-text text-transparent shrink-0">
         不二
       </a>
-      <div class="flex items-center gap-6 text-sm">
-        <div class="flex gap-6">
+      <div class="flex items-center gap-4 text-sm flex-1 justify-end">
+        <div class="flex gap-5">
           <a href="/documents" class="hover:text-zinc-400 transition">文档</a>
           <a href="/diary" class="hover:text-zinc-400 transition">日记</a>
           <a href="/about" class="hover:text-zinc-400 transition">关于</a>
           <a href="/skills" class="hover:text-zinc-400 transition">技能</a>
         </div>
-        <button id="theme-toggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition" title="切换主题" aria-label="切换深浅色模式">
+        <div class="search-wrap">
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="搜索文档和日记..."
+            autocomplete="off"
+          />
+          <div id="search-dropdown" class="search-dropdown"></div>
+        </div>
+        <button id="theme-toggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:border-zinc-400 dark:hover:border-zinc-500 transition shrink-0" title="切换主题" aria-label="切换深浅色模式">
           <svg id="sun-icon" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <svg id="moon-icon" class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -66,7 +133,9 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
       不二 © 2026 · 记录成长与折腾
     </div>
   </footer>
+
   <script>
+    // Theme toggle
     const btn = document.getElementById('theme-toggle');
     const html = document.documentElement;
 
@@ -86,14 +155,82 @@ const { title, description = '不二的数字基地，记录成长与折腾' } =
       }
     }
 
-    // Init: check current state
     const isDark = html.classList.contains('dark');
     document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
     document.getElementById('moon-icon').classList.toggle('hidden', isDark);
+    btn.addEventListener('click', () => setTheme(!html.classList.contains('dark')));
 
-    btn.addEventListener('click', () => {
-      const dark = html.classList.contains('dark');
-      setTheme(!dark);
+    // Search
+    const searchInput = document.getElementById('search-input');
+    const dropdown = document.getElementById('search-dropdown');
+    let allData = { documents: [], diary: [] };
+    let loaded = false;
+
+    async function loadSearchData() {
+      if (loaded) return;
+      try {
+        const [docsRes, diaryRes] = await Promise.all([
+          fetch('/data/documents.json'),
+          fetch('/data/diary.json')
+        ]);
+        if (docsRes.ok) allData.documents = (await docsRes.json()).documents || [];
+        if (diaryRes.ok) allData.diary = (await diaryRes.json()).diary || [];
+        loaded = true;
+      } catch(e) { /* silent */ }
+    }
+
+    function search(query) {
+      if (!query.trim()) { dropdown.classList.remove('show'); return; }
+      const q = query.toLowerCase();
+      const docs = allData.documents.filter(d =>
+        (d.title && d.title.toLowerCase().includes(q)) ||
+        (d.excerpt && d.excerpt.toLowerCase().includes(q)) ||
+        (d.category && d.category.toLowerCase().includes(q))
+      ).slice(0, 5);
+      const diary = allData.diary.filter(d =>
+        (d.title && d.title.toLowerCase().includes(q)) ||
+        (d.excerpt && d.excerpt.toLowerCase().includes(q)) ||
+        (d.category && d.category.toLowerCase().includes(q))
+      ).slice(0, 5);
+
+      if (docs.length === 0 && diary.length === 0) {
+        dropdown.innerHTML = '<div class="search-empty">没有找到匹配的内容</div>';
+        dropdown.classList.add('show');
+        return;
+      }
+
+      let html = '';
+      if (docs.length > 0) {
+        html += '<div class="search-section-label">📄 文档</div>';
+        docs.forEach(d => {
+          html += `<a class="search-item" href="/documents/${d.id}">
+            <div class="search-item-title">${d.title}</div>
+            <div class="search-item-meta">${d.category || ''} · ${d.date || ''}</div>
+            ${d.excerpt ? `<div class="search-item-excerpt">${d.excerpt}</div>` : ''}
+          </a>`;
+        });
+      }
+      if (diary.length > 0) {
+        html += '<div class="search-section-label">📔 日记</div>';
+        diary.forEach(d => {
+          html += `<a class="search-item" href="/diary/${d.id}">
+            <div class="search-item-title">${d.title}</div>
+            <div class="search-item-meta">${d.category || ''} · ${d.date || ''}</div>
+            ${d.excerpt ? `<div class="search-item-excerpt">${d.excerpt}</div>` : ''}
+          </a>`;
+        });
+      }
+      dropdown.innerHTML = html;
+      dropdown.classList.add('show');
+    }
+
+    searchInput.addEventListener('focus', () => { loadSearchData(); if (searchInput.value) search(searchInput.value); });
+    searchInput.addEventListener('input', () => { loadSearchData(); search(searchInput.value); });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.search-wrap')) dropdown.classList.remove('show');
+    });
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { dropdown.classList.remove('show'); searchInput.blur(); }
     });
   </script>
 </body>
