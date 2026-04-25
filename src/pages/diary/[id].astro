@@ -28,6 +28,6 @@ const { entry } = Astro.props;
         {entry.isMilestone && <span class="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 rounded text-xs text-yellow-600 dark:text-yellow-400">🏆 里程碑</span>}
       </div>
     </div>
-    <div class="text-gray-600 dark:text-gray-300 leading-relaxed" set:html={entry.content}></div>
+    <div class="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">{entry.content}</div>
   </article>
 </Base>
