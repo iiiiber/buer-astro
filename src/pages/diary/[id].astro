@@ -28,35 +28,6 @@ const { entry } = Astro.props;
         {entry.isMilestone && <span class="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 rounded text-xs text-yellow-600 dark:text-yellow-400">🏆 里程碑</span>}
       </div>
     </div>
-    <div id="diary-content" class="diary-content"></div>
+    <div class="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">{entry.content}</div>
   </article>
 </Base>
-
-<script define:vars={{ content: entry.content }}>
-  document.addEventListener('DOMContentLoaded', function() {
-    var el = document.getElementById('diary-content');
-    if (el && content) {
-      el.innerHTML = content;
-    }
-  });
-</script>
-
-<style>
-  .diary-content {
-    line-height: 1.8;
-    color: var(--text-secondary, #374151);
-  }
-  .diary-content :global(h1) { font-size: 1.75rem; font-weight: 700; margin: 1.5rem 0 1rem; color: var(--text-primary, #111827); }
-  .diary-content :global(h2) { font-size: 1.35rem; font-weight: 600; margin: 1.25rem 0 0.75rem; color: var(--text-primary, #111827); border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3rem; }
-  .diary-content :global(h3) { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--text-primary, #111827); }
-  .diary-content :global(p) { margin: 0.6rem 0; }
-  .diary-content :global(ul), .diary-content :global(ol) { margin: 0.5rem 0; padding-left: 1.5rem; }
-  .diary-content :global(li) { margin: 0.25rem 0; }
-  .diary-content :global(code) { background: #f3f4f6; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.85em; }
-  .diary-content :global(pre) { background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 1rem 0; }
-  .diary-content :global(pre code) { background: none; padding: 0; color: inherit; }
-  .diary-content :global(strong) { font-weight: 600; color: var(--text-primary, #111827); }
-  :global(.dark) .diary-content { color: #cbd5e1; }
-  :global(.dark) .diary-content :global(code) { background: #374151; }
-  :global(.dark) .diary-content :global(pre) { background: #111827; }
-</style>
