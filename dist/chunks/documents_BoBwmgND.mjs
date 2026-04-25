@@ -1,0 +1,178 @@
+const documents = [
+	{
+		id: "2026-04-25-miaoji-ai-report",
+		title: "喵极AI技术分析报告",
+		date: "2026-04-25",
+		category: "AI产品分析",
+		excerpt: "喵极AI平台完整技术分析，涵盖前端架构（React+Vite）、后端架构、AI生成流程（模板模式/Prompt模式）、API接口、商业模式（能量系统）和微信OAuth认证。",
+		source: "feishu",
+		feishuUrl: "https://feishu.cn/docx/TsGWdoWBvo31m7xpjVXcmvCsntc"
+	},
+	{
+		id: "NUbmdiI2doSHlyxFUl6cMTmonAh",
+		title: "FundQuant基金量化平台设计方案 v1.0",
+		date: "2026-04-24",
+		category: "量化投资",
+		excerpt: "FundQuant基金量化平台完整设计方案，包含系统架构、API接口、数据流程、回测引擎等核心模块设计。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/NUbmdiI2doSHlyxFUl6cMTmonAh"
+	},
+	{
+		id: "HlGudNPBvoLbSDxB9T0cniv2ndd",
+		title: "麒麟操作系统测试工具 FAQ",
+		date: "2026-04-24",
+		category: "操作系统",
+		excerpt: "麒麟操作系统测试工具常见问题解答第二版。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/HlGudNPBvoLbSDxB9T0cniv2ndd"
+	},
+	{
+		id: "E0zBd80iUo3EJQxX4B8c1aDpnWf",
+		title: "麒麟操作系统测试工具FAQ",
+		date: "2026-04-24",
+		category: "操作系统",
+		excerpt: "麒麟操作系统测试工具常见问题解答，涵盖兼容性测试、安装部署、故障排查等。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/E0zBd80iUo3EJQxX4B8c1aDpnWf"
+	},
+	{
+		id: "2026-04-23-daodejing-plan",
+		title: "📜 道德经一个月学习计划",
+		date: "2026-04-23",
+		category: "经典研读",
+		excerpt: "《道德经》共81章，分上篇（道经第1-37章）和下篇（德经第38-81章）。计划每天学习1-3章，一个月完成。四周学习总览：入门、深化、应用、总结。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/NlMadlZBqoHSTPxe6adct2dpnCn"
+	},
+	{
+		id: "2026-04-23-daodejing-detail",
+		title: "📖 道德经逐章详解",
+		date: "2026-04-23",
+		category: "经典研读",
+		excerpt: "《道德经》共81章，分上篇（道经1-37章）和下篇（德经38-81章）。本文档逐章详解原文、翻译、解读与启示，涵盖众妙之门、无为而治、上善若水等核心篇章。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/K6ftdacS7o5oVzxm2E1c3i3XnFd"
+	},
+	{
+		id: "2026-04-14-fund-dev-doc",
+		title: "基金分析系统 - 开发文档 v1.0",
+		date: "2026-04-14",
+		category: "开发文档",
+		excerpt: "基于 fenxi.imoons.cn 架构，设计全新的 A股基金分析平台，支持基金筛选、持仓管理、组合回测、接入且慢 MCP 数据源。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/PvZfdUEimo6A2Kx4AgOcqjmTn8f"
+	},
+	{
+		id: "2026-04-11-website-test-tianxia-simple",
+		title: "网站功能测试报告 - 天下兴农系统",
+		date: "2026-04-11",
+		category: "测试报告",
+		excerpt: "天下兴农系统初步功能测试，覆盖登录、菜单、9个功能模块的表格、表单、按钮操作验证，核心功能均运行正常。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/M6O3dnzdCoknE7xU773cNg0Rneb"
+	},
+	{
+		id: "2026-04-11-website-test-tianxia",
+		title: "网站功能全面测试报告 - 天下兴农系统",
+		date: "2026-04-11",
+		category: "测试报告",
+		excerpt: "天下兴农系统黑盒功能测试，10个模块核心功能运行正常，8个模块增删改查功能可用，建议增加搜索和导出功能。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/JKlMdpfQ9otUuDxnnegcJM9JnMb"
+	},
+	{
+		id: "2026-04-11-website-test-strict",
+		title: "网站功能全面测试报告(严格验证版)",
+		date: "2026-04-11",
+		category: "测试报告",
+		excerpt: "天下兴农系统功能全面测试，涵盖登录、基础信息管理、软件/硬件/OS登记、工单管理等9个模块，发现搜索功能缺失、新增/编辑功能存在Bug等问题。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/WTHfdnohwoMDxfxwPdRc8OX2nuD"
+	},
+	{
+		id: "2026-04-11-website-dev-doc",
+		title: "个人IP网站开发文档",
+		date: "2026-04-11",
+		category: "开发文档",
+		excerpt: "不二个人IP网站完整开发文档，包含架构设计、功能规划、部署方案，核心功能：首页展示、日记、文档、技能、关于页面。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/RSFwd7r2coej4KxoehYcAkPHnld"
+	},
+	{
+		id: "2026-04-11-buer-content-draft",
+		title: "不二内容草稿",
+		date: "2026-04-11",
+		category: "内容草稿",
+		excerpt: "不二网站专属内容草稿文档，用于存放待发布的文章草稿，通过AI辅助创作。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/EDs8dUD7ooKnu1xtYFVcGfXIn5e"
+	},
+	{
+		id: "2026-04-10-qieman-mcp-guide",
+		title: "盈米且慢MCP使用指南",
+		date: "2026-04-10",
+		category: "工具指南",
+		excerpt: "盈米且慢MCP金融工具包使用指南，包含72个金融工具的详细说明和接入指引。",
+		source: "feishu",
+		feishuUrl: "https://yingmi.feishu.cn/docx/PRPRds5SBo2MITxHJL2cMPminEf"
+	},
+	{
+		id: "2026-04-07-pengfei-life-plan",
+		title: "鹏飞人生规划分析报告",
+		date: "2026-04-07",
+		category: "人生规划",
+		excerpt: "基于24天对话记录综合分析鹏飞的性格特征、优势劣势，提出三个人生赛道建议：AI自动化服务、旧衣回收规模化、内容+工具站。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/YNuxdVOhtov2SixzJ6Uctu9gnce"
+	},
+	{
+		id: "2026-04-04-clothes-optimize",
+		title: "旧衣回收副业优化方案（2026年）",
+		date: "2026-04-04",
+		category: "副业方案",
+		excerpt: "旧衣回收副业现状诊断与优化，目标6个月内月收入达到1500-2000元，包含闲鱼优化、淘宝优化、私域运营和每日执行时间表。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/NoZodCXsBoLBlpxo9CdcRqD6nyb"
+	},
+	{
+		id: "2026-04-02-system-test-report-vendor",
+		title: "厂商端系统测试报告",
+		date: "2026-04-02",
+		category: "测试报告",
+		excerpt: "国产自主安全生态智联服务平台厂商端功能测试报告，包含69个测试用例，发现28个严重缺陷。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/OYsBdiyJBouwUaxCqRQckkDOnoc"
+	},
+	{
+		id: "2026-04-02-clothes-miniprogram",
+		title: "旧衣回收微信小程序 - 开发计划",
+		date: "2026-04-02",
+		category: "开发文档",
+		excerpt: "「漫鸟回收」微信小程序完整开发计划，包含西瓜猪API对接、后端API规划、小程序页面清单、4阶段开发计划（18-26天工期）。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/MJ8ad2hh9oHSMlx4q2OcKlTYnqe"
+	},
+	{
+		id: "2026-03-31-system-test-report",
+		title: "系统功能测试报告",
+		date: "2026-03-31",
+		category: "测试报告",
+		excerpt: "国产自主安全生态智联服务平台管理端功能测试报告，57个用例，覆盖19个测试维度。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/SZmPdYjsxop5InxGXdqcLxwxnug"
+	},
+	{
+		id: "2026-03-29-ai-partner-plan",
+		title: "鹏飞 · 30天AI伙伴共创计划",
+		date: "2026-03-29",
+		category: "人生规划",
+		excerpt: "基于20天对话记录分析鹏飞的行为模式与优势，提出两个人生赛道选项（副业内容矩阵 vs AI开发服务），并制定30天聚焦行动计划。",
+		source: "feishu",
+		feishuUrl: "https://my.feishu.cn/docx/L6ZSdCaIyo09h0xLRlycgIdHnhh"
+	}
+];
+const documentsData = {
+	documents: documents
+};
+
+export { documentsData as d };
