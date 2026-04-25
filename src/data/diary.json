@@ -1,6 +1,116 @@
 {
   "diary": [
     {
+      "id": "2026-04-19-server-ip-fix-n8n",
+      "date": "2026-04-19",
+      "title": "2026-04-19 服务器IP纠正与n8n部署讨论",
+      "category": "系统维护",
+      "tags": [
+        "服务器IP",
+        "n8n",
+        "磁盘清理"
+      ],
+      "isMilestone": false,
+      "excerpt": "纠正服务器IP记录（存在两台不同服务器），讨论n8n工作流自动化部署。",
+      "content": "今天完成了重要的信息纠错和项目讨论。\n\n一、服务器IP纠正\n重要发现：存在两台不同的服务器，之前一直搞混。\n\n| IP | 说明 |\n|---|---|\n| 42.192.112.148 | 真实业务服务器（tools.imoons.cn在此） |\n| 43.139.124.235 | Big Admin大后台系统 |\n\n教训：以后操作前必须先ifconfig.me确认当前机器。\n\n二、磁盘空间分析\n服务器磁盘使用率73%，主要占用：\n- /www：2.7G\n- /var/log：176M\n- /tmp：138M\n- /root/.openclaw：565M\n\n三、n8n工作流自动化\n用户对n8n-io/n8n感兴趣（184K⭐，400+集成，支持AI Agent）。\n\n服务器已有Docker 29.1.3，服务正常运行。等待用户确认部署方案。\n\n四、tools.imoons.cn/mini部署\n- 文件位置：/www/wwwroot/tools.imoons.cn/mini/\n- API验证通过：/mini/api/check和/login均正常\n- 登录失败原因：浏览器缓存旧版index.html，需Ctrl+Shift+R强制刷新"
+    },
+    {
+      "id": "2026-04-18-no-conversation",
+      "date": "2026-04-18",
+      "title": "2026-04-18 定时任务监控与需求讨论",
+      "category": "日常记录",
+      "tags": [
+        "定时任务",
+        "数字人生"
+      ],
+      "isMilestone": false,
+      "excerpt": "系统自动运行，与用户讨论个人数据系统搭建需求。",
+      "content": "今日系统自动运行，晚间与用户讨论重要需求。\n\n一、定时任务失败记录\n- 副业项目推送-晚：isolated jiaoyi，状态error\n- CEO健康检查：isolated ceo，状态error\n- CEO周检：isolated ceo，状态error\n\n二、个人数据系统需求讨论\n用户提出做个人数据网站的想法，用于\"数字人生档案\"。\n\n目的：N年后能知道自己做过什么、成长轨迹、自我进化记录。本质价值：数据穿越时间，对抗遗忘。\n\n现有数据资产盘点（120MB+）：\n- 每日记忆：48篇 / 396KB\n- 主会话：52个 / 91MB\n- Agent会话：10个 / 30MB\n- cron执行历史：50+条\n- 飞书同步：13文档+25日记\n\n发现的问题：\n- 4月2日记忆缺失\n- 备份机制不完善\n- 单点存储风险\n\n用户表示暂时不搭建，继续思考需求细节。"
+    },
+    {
+      "id": "2026-04-16-digital-human-nginx-fix",
+      "date": "2026-04-16",
+      "title": "2026-04-16 数字人项目上线与nginx故障修复",
+      "category": "项目开发",
+      "tags": [
+        "数字人",
+        "nginx",
+        "Aira"
+      ],
+      "isMilestone": true,
+      "excerpt": "数字人Aira前端上线，修复nginx故障，完成旧衣回收cron重构。",
+      "content": "今天完成了多个重要项目。\n\n一、nginx故障紧急修复\n根因：/etc/nginx/enable-php-82.conf的fastcgi_pass地址写错，导致read.imoons.cn等PHP站点全部502/下载失败。\n\n修复：修正socket路径为/tmp/php-cgi-82.sock，重启nginx。\n\n重要教训：系统nginx和BT nginx不能共存，禁止用systemctl restart nginx。\n\n二、数字人Aira项目\n前端：tools.imoons.cn/shuziren/已上线\n后端：PM2 shuziren-api运行在3003端口\n\n架构：前端直连MiniMax网关（浏览器绕过服务器IP限制），TTS暂时用浏览器Web Speech API。\n\n三、旧衣回收cron重构\n新方案：cron触发jiaoyi agent（独立会话），由Agent自己完成获取验证码→AI视觉识别→登录→获取订单→飞书推送。\n\n新cron ID：b878088a-879b-442a-8085-bd7f0f6ef5ac，时间每天10:15 AM。"
+    },
+    {
+      "id": "2026-04-13-no-conversation",
+      "date": "2026-04-13",
+      "title": "2026-04-13 系统日常运行",
+      "category": "日常记录",
+      "tags": [
+        "日常运行",
+        "定时任务"
+      ],
+      "isMilestone": false,
+      "excerpt": "今日无对话记录，定时任务正常执行。",
+      "content": "今日无主动对话，定时任务正常执行。\n\n一、定时任务状态\n- 西瓜猪订单推送-上午：正常\n- 晨间简报：正常\n- 副业项目推送-早：正常\n- 每日热榜推送：正常\n- 每日天气推送：正常\n\n二、buer网站排查\n用户问网站内容是否自动更新，发现：\n- 根本原因：活动日志为空，导致没有新日记可生成\n- cron任务执行了，但内容是旧内容反复commit\n- 需要建立活动日志自动写入机制"
+    },
+    {
+      "id": "2026-04-12-fenxi-backend-fix",
+      "date": "2026-04-12",
+      "title": "2026-04-12 fenxi.imoons.cn后端故障恢复",
+      "category": "项目维护",
+      "tags": [
+        "fenxi",
+        "后端故障",
+        "Python"
+      ],
+      "isMilestone": false,
+      "excerpt": "恢复fenxi.imoons.cn后端服务，修复tenacity依赖缺失问题。",
+      "content": "今天完成了fenxi.imoons.cn后端故障的紧急修复。\n\n一、问题发现\n网站主页面正常，但/api/路径返回502 Bad Gateway。\n\n二、根因分析\n- Python后端进程挂了约25小时\n- 最后日志停在2026-04-11 10:26\n- 原因：缺少tenacity依赖模块，导致启动失败\n\n三、服务器信息\n- 服务器：42.192.112.148（腾讯云）\n- root / Kylin123456@\n\n四、修复过程\n后端路径：/www/wwwroot/fenxi.imoons.cn/\n\n启动命令：cd /www/wwwroot/fenxi.imoons.cn && source .venv/bin/activate && nohup python -m streamlit run pages/1_🔍_通用搜索.py --server.port 8888 --browser.serverAddress 0.0.0.0 > server.log 2>&1 &\n\n五、定时任务状态\n两个CEO任务报错（CEO健康检查、CEO周检），jiaoyi agent执行异常，其余任务正常。"
+    },
+    {
+      "id": "2026-04-09-fenxi-fix-nfs-cleanup",
+      "date": "2026-04-09",
+      "title": "2026-04-09 fenxi.imoons.cn SSL修复与磁盘清理",
+      "category": "项目维护",
+      "tags": [
+        "SSL证书",
+        "fenxi",
+        "磁盘清理"
+      ],
+      "isMilestone": false,
+      "excerpt": "修复fenxi.imoons.cn HTTPS访问问题，分析OpenClaw cron调度器异常，清理磁盘。",
+      "content": "今天完成了多项维护工作。\n\n一、fenxi.imoons.cn故障排查\n问题：用户反馈报错\"请求失败\"。\n\n排查过程：\n- 本地curl测试：HTTP 200正常，HTTPS 443连接拒绝\n- SSH登录42.192.112.148\n- 发现nginx只监听80端口，无SSL配置\n- 用certbot申请Let's Encrypt证书\n- 更新nginx配置启用SSL\n- 验证：HTTP 301重定向到HTTPS，200正常\n\n新服务器信息：\n- IP: 42.192.112.148\n- 系统: Ubuntu 6.8.0\n- SSH: root / Kylin123456@\n- 后端: Python FastAPI @ 8888\n- 数据库: SQLite /opt/data/stock_analysis.db\n\n二、OpenClaw cron调度器异常\n下午排查发现SIGTERM信号事件，诊断出：\n- 系统cron task-queue-worker.js正常，队列空时静默退出\n- OpenClaw cron调度器8个任务从未触发\n- 根本原因：调度器知道任务何时该跑，但不触发它们\n\n三、磁盘空间\n新服务器磁盘：40GB总容量，已用21GB，使用率55%。\n\n主要清理项：\n- /var/lib/containerd 6.9G（Docker容器残留）\n- /root/.npm 1.7G（npm缓存）"
+    },
+    {
+      "id": "2026-04-08-server-migration-verify",
+      "date": "2026-04-08",
+      "title": "2026-04-08 服务器迁移验证与cron诊断",
+      "category": "系统维护",
+      "tags": [
+        "服务器迁移",
+        "nginx",
+        "cron诊断"
+      ],
+      "isMilestone": false,
+      "excerpt": "验证旧服务器到新服务器的网站迁移状态，发现cron调度器异常。",
+      "content": "今天完成了服务器迁移验证和重大系统诊断。\n\n一、服务器迁移验证\n验证旧服务器(111.229.212.194)到新服务器(42.192.112.148)的迁移状态。\n\n新服务器验证结果：\n- data.imoons.cn ✅\n- prompt.imoons.cn ✅\n- language.imoons.cn ✅\n- recycle.imoons.cn ✅\n- read.imoons.cn ✅\n- lianghua.imoons.cn ❌（PHP未安装）\n- shuiying.imoons.cn ❌（后端8003端口未运行）\n\n二、prompt.imoons.cn修复\n发现nginx服务状态异常，修复了配置并启动了后端服务。\n\n三、cron调度器异常重大发现\n诊断出OpenClaw cron调度器的核心问题：\n- 不是agents.defaults.timeoutSeconds的问题\n- 根本原因：OpenClaw Cron投递机制有约65秒的硬性上限\n- 所有走main agent的定时任务在投递阶段被卡住65秒后直接失败\n- AI模型根本没开始生成回复\n\n证据：所有失败任务的durationMs都卡在60-76秒区间。\n\n四、解决方案\n提出了任务队列方案（方案A/B），但发现MEMORY.md中记录的task-queue-worker.js方案从未真正执行过。"
+    },
+    {
+      "id": "2026-04-07-prompt-fix-cloudflare",
+      "date": "2026-03-07",
+      "title": "2026-04-07 prompt.imoons.cn修复与Cloudflare配置",
+      "category": "项目维护",
+      "tags": [
+        "prompt",
+        "nginx",
+        "Cloudflare"
+      ],
+      "isMilestone": false,
+      "excerpt": "修复prompt.imoons.cn网站无法访问问题，探索Cloudflare CDN方案解决SSL问题。",
+      "content": "今天完成了prompt.imoons.cn的修复工作。\n\n一、问题排查\n用户反映prompt.imoons.cn生成失败。经过排查发现：\n- nginx配置指向8002端口，但后端实际跑在8001\n- 后端服务未运行\n\n二、问题修复\n- 修正nginx配置\n- 启动后端服务（端口8002）\n- 修复nginx配置路径问题\n\n启动命令：cd /www/wwwroot/prompt.imoons.cn/prompt-api && nohup python -m uvicorn main:app --host 0.0.0.0 --port 8002 > /tmp/prompt-api.log 2>&1 &\n\n三、UI改版\n完全重写了index.html，采用深色宇宙背景+毛玻璃卡片+动态光球风格，深色渐变+Glassmorphism+紫/青/粉配色。\n\n四、腾讯云域名与Cloudflare\n用户计划用Cloudflare CDN解决SSL问题（腾讯云域名，尚未开始配置）。"
+    },
+    {
       "id": "2026-04-06-cron-timeout-fix",
       "date": "2026-04-06",
       "title": "2026-04-06 cron超时彻底解决与Agent重分配",
