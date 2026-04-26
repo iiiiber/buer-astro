@@ -8,11 +8,11 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.16.0",
-    "tailwindcss": "^3.4.0"
+    "@astrojs/tailwind": "5.1.0",
+    "astro": "4.16.0",
+    "tailwindcss": "3.4.0"
   },
   "devDependencies": {
-    "wrangler": "^2.21.3"
+    "wrangler": "2.21.3"
   }
 }
