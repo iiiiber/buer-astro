@@ -1,24 +1,6 @@
 {
   "documents": [
     {
-      "id": "2026-05-27-agency-agents",
-      "title": "agency-agents 全部 Agent 模板列表（162个）",
-      "date": "2026-05-27",
-      "category": "AI资源",
-      "excerpt": "162个Agent模板分类汇总，涵盖Design、Sales、Paid Media、Marketing、Engineering、Product、Game Dev、XR等多个领域。",
-      "source": "feishu",
-      "feishuUrl": "https://my.feishu.cn/docx/KAOYdJB4YoLAQ8x6T0Hc6hRXnKu"
-    },
-    {
-      "id": "2026-05-27-ai-model-engineer",
-      "title": "AI模型应用开发工程师 — 全面介绍",
-      "date": "2026-05-27",
-      "category": "职业发展",
-      "excerpt": "AI模型应用开发工程师是AI能力的落地者——负责将已有的AI大模型通过编程集成到实际业务系统中。包括岗位定义、核心职责、技能要求、与算法工程师的区别，以及薪费前景和入门建议。",
-      "source": "feishu",
-      "feishuUrl": "https://hcny2567fx2t.feishu.cn/docx/C1OLddGthog3WyxbduLcPzhqndc"
-    },
-    {
       "id": "NUbmdiI2doSHlyxFUl6cMTmonAh",
       "title": "FundQuant基金量化平台设计方案 v1.0",
       "date": "2026-04-24",
