@@ -1,6 +1,15 @@
 {
   "documents": [
     {
+      "id": "HPWwdA28codK2cxH6srcEVRBnad",
+      "title": "适配中心 数据看板 搭建全记录",
+      "date": "2026-07-08",
+      "category": "工具搭建",
+      "excerpt": "把 adapt-center.com 后台 903 条适配申请 + 1000 条测试申请，做成数据看板部署到 tools.imoons.cn/adapt-center/。含抓取脚本、cron 周四 16:00 自动同步 + 飞书推送、CMS 后台探索路径、字段去重、离线缓存等关键设计。",
+      "source": "feishu",
+      "feishuUrl": "https://my.feishu.cn/docx/HPWwdA28codK2cxH6srcEVRBnad"
+    },
+    {
       "id": "2026-07-08-adapt-center",
       "title": "适配中心 数据看板 搭建全记录",
       "date": "2026-07-08",
